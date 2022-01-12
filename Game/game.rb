@@ -8,7 +8,7 @@ class Game
     @current_player = @player1
   end
 
-  def start game
+  def start_game
     puts "Game has begun"
     puts "/n"
 
@@ -33,6 +33,31 @@ class Game
       @current_player = @player1
     end
   end
+
+
+  def game_play
+    question = Question.new
+    puts "\n"
+    puts "-- NEW TURN -"
+    puts "\n"
+    puts "#{@current_player.name}: What does #{question.num1} plus #{question.num2} equal?"
+    answer = gets.chomp.to_i
+
+    if answer == question.solution
+      puts "\n"
+      puts "Correct!"
+      "\n"
+    else
+      puts "\n"
+      puts "Nice try."
+      @current_player.lives -= 1
+      
+    end
+    puts "\n"
+    puts "SCORE: #{@player1.name}: #{@player1.lives}/3 -VS- #{@player2.name}: #{@player2.lives}/3"
+    turn
+  end
+  
 
   def end_game
     puts "- GAME OVER -"
